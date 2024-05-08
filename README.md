@@ -42,9 +42,15 @@ In your `build.gradle`, add the following code to the `buildscript` and `allproj
 
 ```groovy
 repositories {
-    google()
+    google()   
     mavenCentral()
-    maven { url 'YOU WILL RECEIVE THIS FROM FAWRY SUPPORT ALONG WITH CREDENTIALS' }
+    maven { 
+        url 'YOU WILL RECEIVE THIS FROM FAWRY SUPPORT ALONG WITH CREDENTIALS' 
+            credentials {
+                username = "YOU WILL RECEIVE THIS FROM FAWRY SUPPORT"
+                password = "YOU WILL RECEIVE THIS FROM FAWRY SUPPORT"
+            }
+    }
 }
 ```
 
@@ -156,3 +162,11 @@ As of the current version, the Fawry NFC SDK does not support iOS. However, the 
      }
    }
    ```
+
+### Additional Resources
+
+You can explore a sample Flutter application that utilizes the Fawry NFC SDK on GitHub. This sample app provides examples and demonstrations of various functionalities offered by the SDK. You can find the sample app at the following repository:
+
+[Flutter Fawry NFC Sample](https://github.com/FawryPay/Flutter-Fawry-NFC-Sample)
+
+Feel free to explore the sample app to understand how to integrate and utilize the Fawry NFC SDK effectively in your Flutter projects.
