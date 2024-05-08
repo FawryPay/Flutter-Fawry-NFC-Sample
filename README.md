@@ -44,7 +44,7 @@ In your `build.gradle`, add the following code to the `buildscript` and `allproj
 repositories {
     google()
     mavenCentral()
-    maven { url 'YOU WILL RECEIVE THIS FROM FAWWRY SUPPORT ALONG WITH CREDENTIALS' }
+    maven { url 'YOU WILL RECEIVE THIS FROM FAWRY SUPPORT ALONG WITH CREDENTIALS' }
 }
 ```
 
@@ -60,19 +60,24 @@ As of the current version, the Fawry NFC SDK does not support iOS. However, the 
    Create an `initSDKCallback()` function to initialize the callback mechanism to receive responses from the Fawry NFC SDK. It sets up a stream listener to handle callback results.
 
    ```dart
-   Future<void> initSDKCallback() async {
-     try {
-       _fawryCallbackResultStream =
-           FawryNfcSdk.instance.callbackResultStream().listen((event) {
-         setState(() {
-           ResponseStatus response = ResponseStatus.fromJson(jsonDecode(event));
-           handleResponse(response);
-         });
-       });
-     } catch (ex) {
-       debugPrint(ex.toString());
-     }
-   }
+    Future<void> initSDKCallback() async {
+      try {
+        _fawryCallbackResultStream =
+            FawryNfcSdk.instance.callbackResultStream().listen((event) {
+          setState(() {
+            ResponseStatus response = ResponseStatus.fromJson(jsonDecode(event));
+            handleResponse(response);
+          });
+        });
+
+        await FawryNfcSdk.instance.initializeSDK(
+          token: 'YOUR TOKEN',
+          secretKey: 'YOUR SECRET KEY',
+        );
+      } catch (ex) {
+        debugPrint(ex.toString());
+      }
+    }
    ```
 
 2. **Handle Responses**
@@ -107,11 +112,9 @@ As of the current version, the Fawry NFC SDK does not support iOS. However, the 
    Available card types are:
 
    ```dart
-   enum CardType {
-     WSC,
-     ELECT,
-     GAS,
-   }
+    CardType.WSC // WATER CARDS
+    CardType.ELECT // ELECTRICITY CARDS
+    CardType.GAS // GAS CARDS
    ```
 
 4. **Read from NFC Card**

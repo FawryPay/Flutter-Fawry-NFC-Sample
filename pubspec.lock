@@ -61,10 +61,10 @@ packages:
     dependency: "direct main"
     description:
       name: fawry_nfc_sdk
-      sha256: "3f6bd7fd0ae03320fb87946483c4e36cd78a76daba19168f5d9ac248d7f18a16"
+      sha256: "8bff62509c5ad05082ebfd23f18c1bd816c13524027d5d458658cdcf0d482435"
       url: "https://pub.dev"
     source: hosted
-    version: "0.0.1"
+    version: "0.0.5"
   file:
     dependency: transitive
     description:

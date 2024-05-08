@@ -22,7 +22,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue),
         useMaterial3: true,
       ),
-      home: const MyHomePage(title: 'FAWRY NFC SAMPLE'),
+      home: const MyHomePage(title: 'FAWRY NFC SCANNER'),
     );
   }
 }
@@ -46,21 +46,26 @@ class _MyHomePageState extends State<MyHomePage> {
     super.initState();
     initSDKCallback();
   }
-
-  // Initialize the Fawry SDK callback
-  Future<void> initSDKCallback() async {
-    try {
-      _fawryCallbackResultStream =
-          FawryNfcSdk.instance.callbackResultStream().listen((event) {
-        setState(() {
-          ResponseStatus response = ResponseStatus.fromJson(jsonDecode(event));
-          handleResponse(response);
+  
+    Future<void> initSDKCallback() async {
+      try {
+        _fawryCallbackResultStream =
+            FawryNfcSdk.instance.callbackResultStream().listen((event) {
+          setState(() {
+            ResponseStatus response = ResponseStatus.fromJson(jsonDecode(event));
+            handleResponse(response);
+          });
         });
-      });
-    } catch (ex) {
-      debugPrint(ex.toString());
+
+        await FawryNfcSdk.instance.initializeSDK(
+          token: 'Will Be Provided By Fawry',
+          secretKey: 'Will Be Provided By Fawry',
+        );
+      } catch (ex) {
+        debugPrint(ex.toString());
+      }
     }
-  }
+
 
   void handleResponse(ResponseStatus response) {
     // Debug print the response
@@ -149,7 +154,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 ),
               ],
             ),
-                        const Text(
+            const Text(
               'Response Messages:',
               textAlign: TextAlign.center,
               style: TextStyle(
